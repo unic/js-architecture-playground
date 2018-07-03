@@ -1,0 +1,23 @@
+{
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": [
+                        "last 2 versions",
+                        "ie > 10",
+                        "iOS > 7"
+                    ]
+                },
+                "useBuiltIns": "usage"
+            }
+        ]
+    ],
+    "env": {
+      "test": {
+        "presets": ["env"]
+      }
+    },
+    "plugins": [ "syntax-dynamic-import" ]
+}

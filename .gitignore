@@ -1,0 +1,9 @@
+# Project specific ignores
+
+dist
+node_modules
+
+*.log
+.idea
+.DS_Store
+.vscode

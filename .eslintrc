@@ -1,0 +1,44 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "printWidth": 90,
+        "trailingComma": "all"
+      }
+    ],
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": true,
+        "ArrowFunctionExpression": true,
+        "FunctionExpression": true
+      }
+    }],
+    "valid-jsdoc": "error",
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
+  },
+  "plugins": [
+    "prettier",
+    "jest"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  }
+}
