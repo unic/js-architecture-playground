@@ -9,15 +9,35 @@
   <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width"/>
   <meta name="description" content=""/>
   <script>
+    window.apps = {};
     window.config = {
       assetsPath: './assets'
     };
   </script>
-  <script src="./assets/scripts/head.js"></script>
+  <script async src="./assets/scripts/head.js"></script>
 </head>
 <body>
   <button data-module="button">Hello</button>
   <button data-module="button">World</button>
+
+  <div data-module="vue-module">
+    <p v-html="options.foo">Loading...</p>
+  </div>
+
+  <div data-module="vue-module" data-vue-module-options='{"foo": "bar overwrite"}'>
+    <p v-html="options.foo">Loading...</p>
+  </div>
+
+  <div style="height: 200vh;"></div>
+
+  <div data-module="lazy-module">Lazy...</div>
+
+  <p>Combine Modules:</p>
+
+  <button data-module="button lazy-module">Lazy...</button>
+
+  <div style="height: 200vh;"></div>
+
   <script defer src="./assets/scripts/main.js"></script>
 </body>
 </html>

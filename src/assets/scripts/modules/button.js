@@ -1,94 +1,86 @@
-/* eslint-disable no-console */
 import observer from '@unic/composite-observer';
+import createModule from '@/libs/create-module';
+import WindowEventObserver from '@/libs/window-event-observer';
 
-/**
- * createButton
- * @param {Object} module - Module
- * @param {Element} module.el - Element
- * @param {Object} module.state - State
- * @param {Object} module.options - Options
- * @param {Object} Dependency - Blaa
- * @param {Function} Vue - Blaa
- * @param {Object} WindowEventObserver - Blaa
- * @return {Object} state
- */
-export const createButton = (
-  { el, state, options },
-  Dependency,
-  Vue,
-  WindowEventObserver,
-) => {
-  /* --- Private methods --- */
+export default createModule({
+  mixins: { observer }, // mixins have to be factory functions as well
+  options: () => ({
+    foo: 'bar',
+  }),
 
   /**
-   * clickHandler
-   * @param {Event} event - Native Event
-   * @return {undefined}
+   * createButton
+   * @param {Object} module - Module
+   * @param {Element} module.el - Element
+   * @param {Object} module.state - State
+   * @param {Object} module.options - Options
+   * @return {Object} state
    */
-  const clickHandler = event => {
-    console.log('clicked', event, el);
-  };
+  constructor({ el, state, options }) {
+    /* --- Private methods --- */
 
-  /**
-   * resizeHandler
-   * @param {Event} event - Native Event
-   * @return {undefined}
-   */
-  const resizeHandler = event => {
-    console.log('resized', event);
-  };
+    /**
+     * clickHandler
+     * @param {Event} event - Native Event
+     * @return {undefined}
+     */
+    const clickHandler = event => {
+      console.log('clicked', event, el);
+    };
 
-  /**
-   * addEventListeners
-   * @return {undefined}
-   */
-  const addEventListeners = () => {
-    el.addEventListener('click', clickHandler);
-    WindowEventObserver.on('resize', resizeHandler);
-  };
+    /**
+     * resizeHandler
+     * @param {Event} event - Native Event
+     * @return {undefined}
+     */
+    const resizeHandler = event => {
+      console.log('resized', event);
+    };
 
-  /**
-   * removeEventListeners
-   * @return {undefined}
-   */
-  const removeEventListeners = () => {
-    el.removeEventListener('click', clickHandler);
-    WindowEventObserver.off('resize', resizeHandler); // This actually doesn't work in current observer
-  };
+    /**
+     * addEventListeners
+     * @return {undefined}
+     */
+    const addEventListeners = () => {
+      el.addEventListener('click', clickHandler);
+      WindowEventObserver.on('resize', resizeHandler);
+    };
 
-  /* --- Public methods --- */
+    /**
+     * removeEventListeners
+     * @return {undefined}
+     */
+    const removeEventListeners = () => {
+      el.removeEventListener('click', clickHandler);
+      WindowEventObserver.off('resize', resizeHandler); // This actually doesn't work in current observer
+    };
 
-  /**
-   * init
-   * @return {undefined}
-   */
-  state.init = () => {
-    addEventListeners();
+    /* --- Public methods --- */
 
-    console.log('el', el);
-    console.log('state', state);
-    console.log('options', options);
-    console.log('Dependency', Dependency);
-    console.log('Vue', Vue);
-    console.log('WindowEventObserver', WindowEventObserver);
-  };
+    /**
+     * init
+     * @return {undefined}
+     */
+    state.init = () => {
+      addEventListeners();
 
-  /**
-   * destroy
-   * @return {undefined}
-   */
-  state.destroy = () => {
-    removeEventListeners();
-  };
+      console.log('**************** module init ****************');
+      console.log('el', el);
+      console.log('state', state);
+      console.log('options', options);
+      console.log('WindowEventObserver', WindowEventObserver);
+    };
 
-  state.init();
+    /**
+     * destroy
+     * @return {undefined}
+     */
+    state.destroy = () => {
+      removeEventListeners();
+    };
 
-  return state;
-};
+    state.init();
 
-export const config = {
-  name: 'button',
-  dependencies: ['Dependency', 'Vue', 'WindowEventObserver'],
-  mixins: [observer],
-  constructor: createButton,
-};
+    return state;
+  },
+});

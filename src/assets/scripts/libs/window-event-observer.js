@@ -1,6 +1,8 @@
 import throttle from 'raf-throttle';
 import observer from '@unic/composite-observer';
 
+// This could be a npm package
+
 /**
  * createWindowEventObserver
  * @return {Object} windowEventObserver
@@ -14,9 +16,14 @@ const createWindowEventObserver = () => {
     state.trigger('resize', event);
   });
 
-  const scrollHandler = throttle(event => {
+  /**
+   * scrollHandler
+   * @param {Event} event - Native Event
+   * @return {undefined}
+   */
+  const scrollHandler = event => {
     state.trigger('scroll', event);
-  });
+  };
 
   /**
    * addEventListeners
@@ -59,4 +66,4 @@ const createWindowEventObserver = () => {
   return state;
 };
 
-export default createWindowEventObserver;
+export default createWindowEventObserver();

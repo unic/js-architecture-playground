@@ -1,23 +1,16 @@
 {
     "presets": [
-        [
-            "env",
-            {
-                "targets": {
-                    "browsers": [
-                        "last 2 versions",
-                        "ie > 10",
-                        "iOS > 7"
-                    ]
-                },
-                "useBuiltIns": "usage"
-            }
-        ]
+      ["@babel/preset-env",
+      {
+        "useBuiltIns": "usage"
+      }]
     ],
     "env": {
       "test": {
-        "presets": ["env"]
+        "presets": ["@babel/preset-env"]
       }
     },
-    "plugins": [ "syntax-dynamic-import" ]
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import"
+    ]
 }
